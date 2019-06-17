@@ -1,0 +1,18 @@
+<html>
+
+<body>
+
+  <p class="tiy">
+    <a href="https://github.com/Lxueyan/-update-odd-number-weeks-curriculum-schedule" target="_blank">odd number weeks
+      curriculum schedule</a>
+  </p>
+
+  <p class="tiy">
+    <a href="https://github.com/Lxueyan/-update-even-number-weeks-curriculum-schedule" target="_blank">even number weeks
+      curriculum schedule</a>
+  </p>
+
+</body>
+
+</html>
+<!--链接选项设计，两个课程表的区别在于内容和颜色配置-->
