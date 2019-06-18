@@ -1,0 +1,210 @@
+﻿
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <style>
+        td {
+            height: 3em;
+            width: 12em;
+            text-align: center;
+            box-shadow: 3px 3px 2px 2px #e3e5e5;
+        }
+
+        td:hover {
+            position: relative;
+            background-color: #EAF2D3;
+            top: -2px;
+            left: 2px;
+        }
+
+        .cell {
+            height: 4em;
+            width: 12em;
+        }
+
+        .cell>.detail {
+            display: none;
+        }
+
+        .cell>.detail.open {
+            display: block;
+            position: absolute;
+            height: 4em;
+            width: 7em;
+            background-color: rgb(226, 241, 181);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <input type=button value=15周 onclick=ff(1)>
+    <input type="button" value="16周" onclick="ff(2);copytab()">
+    <!--“16周”一个按钮控制其他表格隐藏和表格复制两个事件-->
+
+    <table id="1" border=1>
+        <tr>
+            <th colspan="8">curriculum schedule</th>
+        </tr>
+
+        <tr>
+            <th>number / date</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+
+    </table>
+
+    <table id="2" border=1>
+    </table>
+
+    <script>
+
+        function ff(id) {
+            a = document.getElementsByTagName("table");
+            for (m = 0; m < a.length; m++) {
+                a[m].style.display = "none";
+            }
+            a[id - 1].style.display = "block";
+        }
+        /*功能：只显示所选周数的课程表，其他周的隐藏。该程序对表格的数量没有限制*/
+
+        let i = -1;
+        let j = -1;
+        let f = function (event) {
+            console.log(i, j, i * 3 + j + 1);
+        }
+
+        let tblEl = document.getElementById('1');
+        for (let i = 1; i < 5; i++) {
+            let trEl = document.createElement('tr');
+            for (let j = 0; j < 8; j++) {
+                let tdEl = document.createElement('td');
+                let divEl = document.createElement('div');
+                divEl.className = 'cell';
+
+                let detailDivEl = document.createElement('div');
+                detailDivEl.className = 'detail';
+
+                if (i == 1 && j == 1) detailDivEl.innerHTML = "教室：C411；教师：吕成功";
+                if (i == 1 && j == 2) detailDivEl.innerHTML = "教室：C221；教师：张蔚";
+                if (i == 1 && j == 3) detailDivEl.innerHTML = "教室：C105；教师：刘烨";
+                if (i == 1 && j == 4) detailDivEl.innerHTML = "教室：B405；教师：刘亮";
+                if (i == 1 && j == 5) detailDivEl.innerHTML = "教室：C219；教师：张蔚";
+                if (i == 1 && j == 6) detailDivEl.innerHTML = "无课";
+                if (i == 1 && j == 7) detailDivEl.innerHTML = "无课";
+
+                if (i == 2 && j == 1) detailDivEl.innerHTML = "教室：A120；教师：顾洪英";
+                if (i == 2 && j == 2) detailDivEl.innerHTML = "教室：C411；教师：赵芳芳";
+                if (i == 2 && j == 3) detailDivEl.innerHTML = "教室：A120；教师：顾洪英";
+                if (i == 2 && j == 4) detailDivEl.innerHTML = "教室：C411；教师：赵芳芳";
+                if (i == 2 && j == 5) detailDivEl.innerHTML = "教室：B405；教师：刘亮";
+                if (i == 2 && j == 6) detailDivEl.innerHTML = "无课";
+                if (i == 2 && j == 7) detailDivEl.innerHTML = "无课";
+
+                if (i == 3 && j == 1) detailDivEl.innerHTML = "教室：C105；教师：刘烨";
+                if (i == 3 && j == 2) detailDivEl.innerHTML = "教室：C123；教师：李坤";
+                if (i == 3 && j == 3) detailDivEl.innerHTML = "教室：B101；教师：刘晓辉";
+                if (i == 3 && j == 4) detailDivEl.innerHTML = "教室：体育馆;课程：羽毛球";
+                if (i == 3 && j == 5) detailDivEl.innerHTML = "教室：A120；教师：顾洪英";
+                if (i == 3 && j == 6) detailDivEl.innerHTML = "无课";
+                if (i == 3 && j == 7) detailDivEl.innerHTML = "无课";
+
+                if (i == 4 && j == 1) detailDivEl.innerHTML = "教室：B303；教师：张亮";
+                if (i == 4 && j == 2) detailDivEl.innerHTML = "教室：C109；教师：吴君";
+                if (i == 4 && j == 3) detailDivEl.innerHTML = "无课";       
+                if (i == 4 && j == 4) detailDivEl.innerHTML = "教室：B101；教师：刘晓辉";
+                if (i == 4 && j == 5) detailDivEl.innerHTML = "无课";
+                if (i == 4 && j == 6) detailDivEl.innerHTML = "无课";
+                if (i == 4 && j == 7) detailDivEl.innerHTML = "无课";
+
+                detailDivEl.onmouseout = function (event) {
+                    let names = detailDivEl.className.split(' ');
+                    names = names.filter((x) => x != 'open')
+                    detailDivEl.className = names.join(' ');
+                }
+                divEl.append(detailDivEl);
+
+                let briefDivEl = document.createElement('div');
+
+                if (i == 1 && j == 0) briefDivEl.innerHTML = "1(08: 20 - 10: 00)";
+                if (i == 1 && j == 1) briefDivEl.innerHTML = "Web";
+                if (i == 1 && j == 2) briefDivEl.innerHTML = "English";
+                if (i == 1 && j == 3) briefDivEl.innerHTML = "Management Information Systems";
+                if (i == 1 && j == 4) briefDivEl.innerHTML = "Management Science Engineering";
+                if (i == 1 && j == 5) briefDivEl.innerHTML = "English";
+
+                if (i == 2 && j == 0) briefDivEl.innerHTML = "2(10: 20 - 12: 00)";
+                if (i == 2 && j == 1) briefDivEl.innerHTML = "Introduction to Mao Zedong Thought ";
+                if (i == 2 && j == 2) briefDivEl.innerHTML = "Foundations of Management Science";
+                if (i == 2 && j == 3) briefDivEl.innerHTML = "Introduction to Mao Zedong Thought";
+                if (i == 2 && j == 4) briefDivEl.innerHTML = "Foundations of Management Science";
+                if (i == 2 && j == 5) briefDivEl.innerHTML = "Management Science Engineering";
+
+                if (i == 3 && j == 0) briefDivEl.innerHTML = "3(14:00-15:40)";
+                if (i == 3 && j == 1) briefDivEl.innerHTML = "Management Information Systems";
+                if (i == 3 && j == 2) briefDivEl.innerHTML = "Situation and Policy";
+                if (i == 3 && j == 3) briefDivEl.innerHTML = "Accounting";
+                if (i == 3 && j == 4) briefDivEl.innerHTML = "PE";
+                if (i == 3 && j == 5) briefDivEl.innerHTML = "Introduction to Mao Zedong Thought";
+
+                if (i == 4 && j == 0) briefDivEl.innerHTML = "4(16: 00 - 17: 40)";
+                if (i == 4 && j == 1) briefDivEl.innerHTML = "Electronic Commerce";
+                if (i == 4 && j == 2) briefDivEl.innerHTML = "Introduction to Database System";
+                if (i == 4 && j == 4) briefDivEl.innerHTML = "Accounting";
+                divEl.append(briefDivEl);
+
+                tdEl.onclick = function (event) {
+                    let names = detailDivEl.className.split(' ');
+                    if (names.indexOf('open') >= 0) {
+                        names = names.filter((x) => x != 'open')
+                    } else {
+                        names.push('open');
+                    }
+                    console.log(names);
+                    detailDivEl.className = names.join(' ');
+                };
+
+                tdEl.append(divEl);
+                trEl.append(tdEl);
+            }
+            tblEl.append(trEl);
+        }
+
+        function copytab() {
+            let tblEl = document.getElementById('1');
+            let cotab = document.createElement('table');
+            cotab.innerHTML = tblEl.innerHTML;
+            cotab.border = tblEl.border;
+            document.body.appendChild(cotab);
+        }
+        /*实现表格复制*/
+
+    </script>
+    
+    道歉声明：记不清注释要写在代码界面还是网页显示界面，所以两个界面都写了。给您带来的不便表示抱歉！
+    功能实现：1、点击按钮事件显示本周课程或隐藏非本周的课程表；
+             2、利用坐标确定各单元格位置，完成课程的对应输入及输出；
+             3、建立表格复制函数，使数据无需重复输入，减少数据冗余。
+    
+    设计问题：复制函数得到的16周课表不具备15周课表的详细说明功能块，即不能实现完全复制。
+             同时，本意想设计一个调用函数，用来修改16周课程内容，但是各种尝试后没有成功。
+</body>
+
+</html>
+<!--道歉声明：记不清注释要写在代码界面还是网页显示界面，所以两个界面都写了。给您带来的不便表示抱歉！
+    功能实现：1、点击按钮事件显示本周课程或隐藏非本周的课程表；
+             2、利用坐标确定各单元格位置，完成课程的对应输入及输出；
+             3、建立表格复制函数，使数据无需重复输入，减少数据冗余。
+    
+    设计问题：复制函数得到的16周课表不具备15周课表的详细说明功能块，即不能实现完全复制。
+             同时，本意想设计一个调用函数，用来修改16周课程内容，但是各种尝试后没有成功。-->
